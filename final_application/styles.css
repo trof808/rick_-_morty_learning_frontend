@@ -1,0 +1,123 @@
+body {
+    background-color: #405D72;
+    width: 100vw;
+}
+
+.wrapper {
+    position: relative;
+}
+
+.heroes-container {
+    max-width: 1000px;
+}
+
+.heroes-search {
+    width: 60%;
+    height: 20px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    outline: none;
+    border: none;
+    padding: 10px;
+    background-color: #353535;
+    color: #aaa;
+}
+
+.heroes-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    height: 100%;
+    align-items: center;
+    overflow: scroll;
+    max-height: 100vh;
+}
+
+.item {
+    width: 210px;
+    height: 210px;
+    display: flex;
+}
+
+.item>img {
+    border-radius: 20px;
+    /* Сделали углы картинки плавными */
+    box-shadow: 7px 7px 5px 1px #102C57;
+    /* Сделали тень */
+    transition: transform 0.5s;
+    /* Плавность анимации для transform */
+    cursor: pointer;
+    /* При наведении курсор становится рукой */
+}
+
+.item>img.hidden {
+    display: none;
+}
+
+.item.alive>img {
+    border: 5px solid #52b442;
+}
+
+.item.dead>img {
+    border: 5px solid #e46b6b;
+}
+
+.item.unknown>img {
+    border: 5px solid #4e4e4e;
+}
+
+.item>img:hover {
+    transform: rotate(10deg); /* Повернули на 10 градусов при наведении мышкой */
+}
+
+.item-info {
+    color: #eee;
+    background-color: #383838;
+    padding: 10px;
+    border-radius: 20px;
+}
+
+.item-info.hidden {
+    display: none;
+}
+
+.item-info > .status {
+    background-color: #52b442;
+    width: fit-content;
+    padding: 2px 5px;
+    border-radius: 7px;
+}
+
+.item-info > .status.alive {
+    background-color: #52b442;
+}
+
+.item-info > .status.dead {
+    background-color: #e46b6b;
+}
+
+.item-info > .status.unknown {
+    background-color: #4e4e4e;
+}
+
+@keyframes scale {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.portal {
+    position: absolute;
+    top: 96px;
+    right: -439px;
+    height: 800px;
+    animation: scale 2s ease infinite;
+}
