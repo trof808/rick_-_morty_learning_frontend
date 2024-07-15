@@ -6,8 +6,6 @@ async function getHeroes(page = 1, name = '', status = null) {
     return fetch(url).then(res => res.json());
 }
 
-const heroesListElement = document.querySelector('.heroes-list');
-
 let isAllRendered = false;
 
 function createHeroInfo({ name, status, origin }) {
@@ -39,10 +37,9 @@ function createHeroInfo({ name, status, origin }) {
     return heroInfo;
 }
 
-function createHeroeElement({ name, status, image, origin }, isLast) {
+function createHeroeElement({ name, status, image, origin }) {
     const heroeElement = document.createElement('div');
     const heroeImg = document.createElement('img');
-    const nextButton = document.createElement('button');
     const heroInfo = createHeroInfo({ name, status, origin })
     heroeImg.src = image;
     heroeImg.width = 200;
@@ -73,27 +70,64 @@ function createHeroeElement({ name, status, image, origin }, isLast) {
     return heroeElement;
 }
 
-function renderAllHeroes(name = '') {
+function renderAllHeroes() {
+    let page = 1;
+    let hasNext = true;
+    let name = '';
+
+    const heroesListElement = document.querySelector('.heroes-list');
     heroesListElement.innerHTML = '';
-    getHeroes(1, name).then(data => {
-        console.log(data);
-        const isLast = data.info.next;
-        const heroes = data.results;
-        heroes.forEach(heroeParameters => {
-            heroesListElement.appendChild(createHeroeElement(heroeParameters, isLast));
+
+    const fetchAndRender = () => {
+        getHeroes(page, name).then(data => {
+            console.log(data);
+            hasNext = !!data.info.next;
+            const heroes = data.results;
+            heroes.forEach(heroeParameters => {
+                heroesListElement.appendChild(createHeroeElement(heroeParameters));
+            });
         });
-    });
+    }
+
+    fetchAndRender();
+
+    return {
+        renderMore: function() {
+            page += 1;
+            return fetchAndRender()
+        },
+        renderByName: function(value) {
+            name = value;
+            page = 1;
+            heroesListElement.innerHTML = ''
+            fetchAndRender()
+        },
+        getHasNext: function() {
+            return hasNext;
+        }
+    }
 }
 
-function searchHeroes() {
+function initSearchHeroes({ onChange }) {
     const searchElement = document.querySelector('.heroes-search');
     console.log(searchElement);
     searchElement.addEventListener('keyup', (e) => {
-        console.log(e);
         const value = e.target.value;
-        renderAllHeroes(value);
+        onChange(value);
     })
 }
 
-renderAllHeroes();
-searchHeroes();
+function initFetchMoreBtn({ onClick }) {
+    const fetchMorebtn = document.querySelector('button.fetch-more-btn');
+    fetchMorebtn.addEventListener('click', (e) => {
+        onClick()
+    });
+}
+
+function initApp() {
+    const { renderMore, renderByName, getHasNext } = renderAllHeroes();
+    initFetchMoreBtn({ onClick: renderMore });
+    initSearchHeroes({ onChange: renderByName });
+}
+
+initApp();
