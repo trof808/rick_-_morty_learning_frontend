@@ -1,5 +1,8 @@
 ## Задание
 
+В папке rick_card лежит похожий пример, можно подглядывать
+Чтобы посмотреть примеры, надо открыть index.html файл в браузере
+
 0. Открой всю папку rick_and_morty в visual studio code
 1. Создать папку morty_card внутри rick_and_morty
 2. В папке morty_card создать файл index.html
