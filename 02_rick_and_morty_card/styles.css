@@ -1,0 +1,33 @@
+/* Стиль для всей страницы */
+body {
+    background-color: #405D72; /* Цвет фона */
+}
+
+.item {
+    width: 214px;
+    height: 214px;
+}
+
+/* Стиль для картинки внутри <div class="item"> */
+.item > img {
+    border-radius: 20px; /* Закругление углов */
+    box-shadow: 7px 7px 5px 1px #102C57; /* Тень */
+    transition: transform 1s; /* Плавность анимации */
+    cursor: pointer; /* Стиль курсора */
+}
+
+/* При наведении на картинку */
+.item:hover > img {
+    transform: rotate(10deg); /* Повернуть на 10 градусов */
+}
+
+.alive > img {
+    border: 7px solid #307730;
+}
+
+.heroes-list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 20px;
+}
