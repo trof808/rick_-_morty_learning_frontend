@@ -1,0 +1,69 @@
+/* Стиль для всей страницы */
+body {
+    background-color: #D6BD98; /* Цвет фона */
+}
+
+.item {
+    width: 214px;
+    height: 214px;
+}
+
+/* Стиль для картинки внутри <div class="item"> */
+.item > img {
+    border-radius: 20px; /* Закругление углов */
+    box-shadow: 7px 7px 5px 1px #102C57; /* Тень */
+    transition: transform 1s; /* Плавность анимации */
+    cursor: pointer; /* Стиль курсора */
+}
+
+/* При наведении на картинку */
+.item:hover > img {
+    transform: rotate(10deg); /* Повернуть на 10 градусов */
+}
+
+.alive > img {
+    border: 7px solid #307730;
+}
+
+.heroes-list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 10px;
+}
+
+.search-hero {
+    border: none;
+    background-color: #677D6A;
+    outline: none;
+    border-radius: 10px;
+    width: 300px;
+    padding: 10px;
+    color: white;
+    letter-spacing: 1.5px;
+    box-sizing: border-box;
+    height: 40px;
+    transition: border .3s;
+}
+
+.search-hero:focus {
+    border: 3px solid #1A3636;
+}
+
+button {
+    background-color: #03346E;
+    border: none;
+    color: #eee;
+    border-radius: 10px;
+    cursor: pointer;
+    box-sizing: border-box;
+    height: 40px;
+    padding: 0 20px;
+    transition: all .3s;
+}
+
+button:hover {
+    box-shadow: 1px 1px 5px 1px #021526;
+    transform: scale(1.1);
+}
